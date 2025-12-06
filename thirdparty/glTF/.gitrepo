@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/KhronosGroup/glTF.git
+	branch = interactivity
+	commit = 248c2e315899ea491602fad111020c5bc570677e
+	parent = 3510451d5e055d95677b06f7afa01877ea92147f
+	method = merge
+	cmdver = 0.4.9
