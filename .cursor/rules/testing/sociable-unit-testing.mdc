@@ -1,0 +1,88 @@
+---
+type: Always
+description: Testing Philosophy
+---
+
+# Sociable Unit Testing (Preferred)
+
+## The Principle
+
+Prefer **sociable unit tests** over solitary tests. Sociable tests allow the unit under test to collaborate with real dependencies, using test doubles (mocks) only for awkward collaborations.
+
+Based on [Martin Fowler's Unit Test article](https://martinfowler.com/bliki/UnitTest.html).
+
+## When to Use Sociable Tests
+
+**Use real dependencies when:**
+- The dependency is fast and deterministic
+- The dependency is part of the same codebase
+- Tracking down failures is straightforward
+- The dependency doesn't introduce non-determinism
+
+**Use test doubles (mocks) when:**
+- External services (HTTP APIs, remote databases)
+- Non-deterministic behavior (random numbers, timestamps, network calls)
+- Slow operations that would make tests too slow
+- Awkward collaborations (credit card verification, payment processing)
+- When the real dependency is unavailable in test environment
+
+## Testing Approach
+
+1. **Start with Real Dependencies**: Write tests using real collaborators first
+2. **Mock Only When Necessary**: Add mocks only for awkward collaborations
+3. **Accept Graceful Degradation**: Tests should handle missing dependencies gracefully
+4. **Fast Feedback**: Tests should run fast enough for frequent execution (compile suite: sub-second to few seconds)
+
+## Examples
+
+### Sociable Test (Preferred)
+```elixir
+test "creates plan from tasks" do
+  tasks = [%{type: :avatar_customization, operations: [:load_in_unity]}]
+  
+  # Uses real Bridge, Repo, and Plan schema
+  result = Planner.Bridge.schedule_avatar_tasks(tasks)
+  
+  assert {:ok, plan_id} = result
+  plan = Repo.get(Plan, plan_id)
+  assert %Plan{} = plan
+end
+```
+
+### Mocked Test (When Necessary)
+```elixir
+test "handles recommender unavailable" do
+  # Mock external recommender service
+  with_mocked_recommender(:error, fn ->
+    result = Bridge.schedule_with_recommendations("user_id")
+    
+    # Should handle gracefully
+    assert {:error, _} = result
+  end)
+end
+```
+
+## Benefits
+
+- **Easier to Write**: No need to set up mocks for every dependency
+- **More Realistic**: Tests actual behavior with real collaborators
+- **Easier Debugging**: Failures point to actual problems, not mock configuration
+- **Better Coverage**: Tests integration between closely related components
+
+## Trade-offs
+
+- **Faster Tests**: Sociable tests may be slightly slower, but still fast enough
+- **Failure Isolation**: Failures in collaborators may cause multiple test failures, but this is acceptable when tracking down the actual fault is straightforward
+
+## Guidelines
+
+1. **Test the Unit's Behavior**: Focus on what the unit does, not how it does it
+2. **Use Real Database**: SQLite in-memory or test database is fast enough
+3. **Mock External Services**: HTTP clients, remote APIs, payment processors
+4. **Accept Partial Failures**: If external dependency unavailable, test should fail gracefully with clear error
+5. **Run Tests Frequently**: Compile suite should run in sub-second to few seconds
+
+## References
+
+- [Martin Fowler: Unit Test](https://martinfowler.com/bliki/UnitTest.html) - Sociable vs Solitary tests
+- [Jay Fields: Working Effectively with Unit Tests](https://www.amazon.com/Working-Effectively-Unit-Tests/dp/1941222293) - Origin of "sociable" and "solitary" terms

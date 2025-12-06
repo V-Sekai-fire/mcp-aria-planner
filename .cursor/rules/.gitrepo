@@ -1,0 +1,12 @@
+; DO NOT EDIT (unless you know what you are doing)
+;
+; This subdirectory is a git "subrepo", and this file is maintained by the
+; git-subrepo command. See https://github.com/ingydotnet/git-subrepo#readme
+;
+[subrepo]
+	remote = https://github.com/fire/.clinerules
+	branch = main
+	commit = 2e60ba371fce6468e2ff7ad67e4a48f2653321e1
+	parent = 3fbd65cb9f7526a2f974566761ce9acb2db251d6
+	method = merge
+	cmdver = 0.4.9

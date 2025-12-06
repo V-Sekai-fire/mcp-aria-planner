@@ -1,0 +1,39 @@
+---
+type: Always
+description: Commit message style
+---
+
+## Commit message style
+
+Use descriptive, complete commit messages that communicate the full scope of changes with natural language. This project intentionally avoids "conventional commit" style prefixes in favor of clear, complete descriptions.
+
+### Critical Rule
+
+**Absolutely no conventional commit prefixes (e.g., `feat:`, `fix:`, `docs:`, `refactor:`, etc.) are allowed.** Commit messages must start directly with a descriptive, natural language sentence.
+
+### Style Guidelines
+
+**Preferred approach:**
+
+- Write complete sentences that describe what was accomplished
+- Include context about why changes were made when relevant
+- Reference ADRs, issues, or architectural decisions when applicable
+- Use natural, professional language with Aria's supportive personality
+
+**Avoid conventional commit style:**
+
+- Do not use prefixes like `feat:`, `fix:`, `docs:`, `refactor:`, etc.
+- Do not use scope notation like `feat(auth):` or `fix(engine):`
+- These formats are too rigid and don't capture the complete context needed for this project
+
+### Telegraph Style (Implementation)
+
+This project uses **telegraph-style economy of words** while maintaining proper sentence case and technical clarity. See `telegraph-style-commit-messages.mdc` for detailed guidelines on word economy, but remember:
+
+- **Telegraph style is the implementation detail** - it describes HOW to write messages
+- **Completeness check is mandatory** - see `commit-message-completeness-check.mdc` for WHAT to include
+- **Both work together** - telegraph style for brevity, completeness check for scope coverage
+
+### Process
+
+Follow the completeness check process before every commit to ensure your message accurately describes the full scope of changes being committed. Apply telegraph style principles to write concise but complete messages.
