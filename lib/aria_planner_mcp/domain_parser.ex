@@ -109,7 +109,7 @@ defmodule AriaPlannerMcp.DomainParser do
         "valid" => valid,
         "errors" => Enum.reverse(errors),
         "warnings" => Enum.reverse(warnings),
-        "message" => if valid, do: "Behavior graph is valid", else: "Behavior graph has errors"
+        "message" => (if valid, do: "Behavior graph is valid", else: "Behavior graph has errors")
       }
       
       {:ok, result}

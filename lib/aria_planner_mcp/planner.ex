@@ -93,7 +93,7 @@ defmodule AriaPlannerMcp.Planner do
         "valid" => valid,
         "errors" => errors,
         "warnings" => warnings,
-        "message" => if valid, do: "Domain and problem are valid", else: "Validation failed"
+        "message" => (if valid, do: "Domain and problem are valid", else: "Validation failed")
       }
       
       {:ok, result}

@@ -37,10 +37,10 @@ defmodule AriaPlannerMcp.MixProject do
 
   defp deps do
     [
-      {:ex_mcp, git: "https://github.com/fire/ex_mcp.git", branch: "master"},
+      {:ex_mcp, git: "https://github.com/fire/ex_mcp.git", branch: "master", override: true},
       {:jason, "~> 1.4"},
       {:plug_cowboy, "~> 2.7"},
-      {:briefly, "~> 0.4"},
+      {:briefly, "~> 0.4", override: true},
       {:aria_planner, git: "https://github.com/V-Sekai-fire/aria-planner.git"},
       {:aria_math, git: "https://github.com/V-Sekai-fire/aria-math.git"},
       {:aria_gltf, git: "https://github.com/V-Sekai-fire/aria-gltf.git"},
